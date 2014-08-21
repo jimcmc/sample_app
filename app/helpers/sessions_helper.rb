@@ -47,4 +47,12 @@ module SessionsHelper
     gravatar_url = "https://secure.gravatar.com/avatars/#{gravatar_id}.png?s=#{size}"
     image_tag(gravatar_url, alt: user.name, class: "gravatar")
   end
+
+  def signed_in_user
+    if !signed_in?
+      store_location
+      redirect_to signin_url, notice: "Please sign in." unless signed_in?
+    end
+  end
+
 end
